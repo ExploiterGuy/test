@@ -115,6 +115,38 @@ function Library:AddButton(text, onClickFunction)
     table.insert(elements, button)  -- Add the button to the list of elements
 end
 
+-- Function to add a toggle button
+function Library:AddToggle(text, onToggleFunction)
+    local toggle = Instance.new("TextButton")
+    toggle.Parent = elements[1]  -- The MainFrame
+    toggle.Size = UDim2.new(0.9, 0, 0, buttonHeight)
+    toggle.BackgroundColor3 = Color3.fromRGB(0, 135, 180)
+    toggle.Text = text
+    toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
+    toggle.Font = Enum.Font.Gotham
+    toggle.TextSize = 16
+
+    -- Add rounded corners
+    local UICornerToggle = Instance.new("UICorner")
+    UICornerToggle.Parent = toggle
+    UICornerToggle.CornerRadius = UDim.new(0, 10)
+
+    -- Toggle effect
+    toggle.MouseEnter:Connect(function()
+        toggle.BackgroundColor3 = Color3.fromRGB(0, 155, 195)
+    end)
+    toggle.MouseLeave:Connect(function()
+        toggle.BackgroundColor3 = Color3.fromRGB(0, 135, 180)
+    end)
+
+    -- Toggle functionality
+    toggle.MouseButton1Click:Connect(function()
+        onToggleFunction(toggle.Text)
+    end)
+
+    table.insert(elements, toggle)  -- Add the toggle to the list of elements
+end
+
 -- Function to add a textbox
 function Library:AddTextbox(defaultText, onTextChanged)
     local textbox = Instance.new("TextBox")
